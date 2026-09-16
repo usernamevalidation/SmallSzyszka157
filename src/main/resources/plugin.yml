@@ -1,0 +1,30 @@
+   name: SmallSzyszka157
+   version: 1.0
+   main: ca.small_szyszka157.sizeplugin.SmallSzyszka157
+   api-version: '1.21'
+   author: small_szyszka157
+   description: A plugin that changes player scale when wearing specific helmets.
+
+   commands:
+     hsize:
+       description: Manage SmallSzyszka157
+       usage: /<command> [reload|status|list|debug|help]
+       permission: sizeplugin.use
+       permission-message: You don't have permission to use this command!
+
+   permissions:
+     sizeplugin.use:
+       description: Allows use of the /hsize command
+       default: true
+     sizeplugin.reload:
+       description: Allows reloading the plugin
+       default: op
+     sizeplugin.status:
+       description: Allows viewing plugin status
+       default: op
+     sizeplugin.list:
+       description: Allows viewing helmet list
+       default: true
+     sizeplugin.debug:
+       description: Allows running /hsize debug
+       default: op

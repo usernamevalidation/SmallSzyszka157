@@ -1,0 +1,65 @@
+   # SmallSzyszka157 Configuration
+   # Debug mode: Set to true to see detailed logs in console
+   debug-mode: false
+
+   # ============================================
+   # PVP COOLDOWN FEATURE
+   # Master switch. When false, no damage type triggers
+   # a size cooldown, regardless of the settings below.
+   # ============================================
+   pvp-cooldown-enabled: true
+
+   # ============================================
+   # DAMAGE TRIGGERS - Choose what resets size
+   # Each trigger is true/false
+   # ============================================
+   damage-triggers:
+     # ---- VICTIM (the player who GETS hit) ----
+     # Player damage (PvP) - another player hits you
+     player: true
+     # Mob/Entity damage (PvE) - a mob or mob projectile hits you
+     entity: false
+     # Natural damage (lava, fire, fall, drowning, etc.)
+     natural: false
+
+     # ---- ATTACKER (the player who DEALS the hit) ----
+     # Attacker gets a cooldown when they hit another PLAYER
+     attacker-pvp: false
+     # Attacker gets a cooldown when they hit a MOB
+     attacker-mob: false
+
+   # ============================================
+   # COOLDOWN SECONDS
+   # How long each trigger disables the player's size.
+   # Only used when the matching trigger above is true.
+   # ============================================
+   cooldown-seconds:
+     player: 15
+     entity: 15
+     natural: 15
+     attacker-pvp: 15
+     attacker-mob: 15
+
+   # ============================================
+   # LIST COMMAND PERMISSION
+   # ============================================
+   list-requires-permission: false
+
+   # ============================================
+   # NAMED HELMETS
+   # ============================================
+   helmets:
+     "szyszka157": 0.7
+     "tiny": 0.5
+     "giant": 1.5
+     "mini": 0.5
+     "normal": 1.0
+
+   # ============================================
+   # COLORED HELMETS
+   # ============================================
+   colors:
+     # "255,0,0": 0.7
+
+   # Scale attribute - LEAVE BLANK FOR AUTO-DETECTION
+   scale-attribute: ""

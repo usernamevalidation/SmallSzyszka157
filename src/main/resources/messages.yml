@@ -1,0 +1,117 @@
+# ============================================
+# SmallSzyszka157 - Messages
+# ============================================
+# Color codes: use & followed by the code (e.g. &a, &c, &6, &l)
+# Placeholders use %name% format and are replaced at runtime.
+#
+# Every entry can be either a single string or a list of strings.
+# Example single: key: "text"
+# Example list:   key: ["line 1", "line 2"]
+#
+# Inside a list, lines containing %name% or %scale% are sent
+# once per helmet. Other lines are sent once.
+#
+# If a key is missing, nothing is sent to the player and a
+# warning is logged once per session. /hsize reload re-reads this file.
+# ============================================
+
+# Prefix placeholder - use %prefix% on any line to insert this
+prefix: "&6[SmallSzyszka157]&r"
+
+# ============================================
+# GENERIC
+# ============================================
+generic:
+  no-permission: "&cNo permission!"
+  player-only: "&cThis command can only be run by a player."
+
+# ============================================
+# /hsize BASE COMMAND
+# ============================================
+hsize:
+  help:
+    - "&6=== SmallSzyszka157 Commands ==="
+    - "&e/hsize reload &7- Reload config"
+    - "&e/hsize status &7- Show status"
+    - "&e/hsize list &7- List helmets"
+
+  reload:
+    - "&aSmallSzyszka157 reloaded!"
+    - "&7PVP Cooldown: %status%"
+    - "&7Victim - Player: %victim-player% &7(%victim-player-seconds%s)&7, Entity: %victim-entity% &7(%victim-entity-seconds%s)&7, Natural: %victim-natural% &7(%victim-natural-seconds%s)s"
+    - "&7Attacker - PvP: %attacker-pvp% &7(%attacker-pvp-seconds%s)&7, Mob: %attacker-mob% &7(%attacker-mob-seconds%s)s"
+    - "&7Helmets: %count%"
+
+  status:
+    - "&6=== SmallSzyszka157 Status ==="
+    - "&ePVP Cooldown: %status%"
+    - "&eVictim Triggers:"
+    - "&7  Player: %victim-player% &7(&f%victim-player-seconds%s&7)"
+    - "&7  Entity: %victim-entity% &7(&f%victim-entity-seconds%s&7)"
+    - "&7  Natural: %victim-natural% &7(&f%victim-natural-seconds%s&7)"
+    - "&eAttacker Triggers:"
+    - "&7  PvP: %attacker-pvp% &7(&f%attacker-pvp-seconds%s&7)"
+    - "&7  Mob: %attacker-mob% &7(&f%attacker-mob-seconds%s&7)"
+    - "&eHelmets Loaded: &f%count%"
+    - "&7Use /hsize list to see all helmets"
+
+  list:
+    - "&6=== Helmets ==="
+    - "&7Name any helmet to these names using a nametag"
+    - "&e  %name% &7-> %scale%"
+    - "&7You can also use colors from the colors: section"
+
+# ============================================
+# VALUE REPLACEMENTS
+# Used inside %status% placeholders
+# ============================================
+values:
+  enabled: "&cENABLED"
+  disabled: "&aDISABLED"
+  "yes": "&aYES"
+  "no": "&cNO"
+
+# ============================================
+# COOLDOWN MESSAGES
+# ============================================
+cooldown:
+  started: "&c[!] You've taken damage! Your size has been disabled for %seconds% seconds!"
+  started-sub: "&7Your size will return when the cooldown ends."
+  refreshed: "&e[!] Cooldown reset! Your size is disabled for another %seconds% seconds."
+  warning: "&e[!] Your size will return in %seconds% seconds!"
+
+# ============================================
+# DEBUG COMMAND
+# ============================================
+debug:
+  header: "&6=== SmallSzyszka157 Debug ==="
+  file-written: "&aDebug output written to: &f%file%"
+  file-failed: "&cCould not write debug.log: %error%"
+  permission: "&cYou don't have permission to run /hsize debug."
+  section-paths: "&e[Paths]"
+  section-raw-yaml: "&e[Raw YAML from disk]"
+  section-memory: "&e[In-memory state]"
+  section-messages: "&e[Message key probe]"
+  section-runtime: "&e[Runtime]"
+  label-ok: "&aOK"
+  label-missing: "&cMISSING"
+  label-null: "&cNULL"
+  log-line: "&7%key%: &f%value%"
+
+# ============================================
+# CONSOLE (only shown in server console/logs)
+# ============================================
+console:
+  enabled-header: "========================================="
+  enabled-title: "SmallSzyszka157 v1.0 has been enabled!"
+  enabled-pvp: "PVP Cooldown: %status%"
+  enabled-victim: "Victim triggers - Player: %victim-player%, Entity: %victim-entity%, Natural: %victim-natural%"
+  enabled-attacker: "Attacker triggers - PvP: %attacker-pvp%, Mob: %attacker-mob%"
+  enabled-helmets: "Helmets loaded: %count%"
+  enabled-helmet-entry: "  Loaded helmet: '%name%' -> %scale%"
+  disabled: "SmallSzyszka157 disabled!"
+  scale-supported: "GENERIC_SCALE supported!"
+  scale-missing: "GENERIC_SCALE NOT supported! Using fallback method."
+  scale-fallback-found: "Found fallback attribute: %name%"
+  scale-fallback-none: "No scale attribute found!"
+  config-loaded: "messages.yml loaded successfully."

@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+}
+
+group = 'ca.small_szyszka157'
+version = '1.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'spigotmc-repo'
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+    }
+}
+
+dependencies {
+    compileOnly 'org.spigotmc:spigot-api:1.20.5-R0.1-SNAPSHOT'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+// Rename the built jar to match the plugin name from plugin.yml
+jar {
+    archiveBaseName.set('SmallSzyszka157')
+    archiveVersion.set('')
+    archiveClassifier.set('')
+}
