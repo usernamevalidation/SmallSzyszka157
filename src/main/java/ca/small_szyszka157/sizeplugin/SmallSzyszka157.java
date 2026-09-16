@@ -455,6 +455,24 @@
            isInCooldown.put(playerId, true);
            cooldownEndTime.put(playerId, newEndTime);
 
+           // Schedule an automatic size reapply when this cooldown expires.
+           // Bukkit scheduler runs on the main thread; safe to touch the player here.
+           long delayTicks = Math.max(1L, (newEndTime - currentTime) / 50L);
+           scheduleExpiry(player, playerId, newEndTime, delayTicks);
+           Bukkit.getScheduler().runTaskLater(this, () -> {
+               // Only reapply if this exact cooldown is still the active one.
+               Long stillEndsAt = cooldownEndTime.get(playerId);
+               if (stillEndsAt == null || stillEndsAt.longValue() != newEndTime) {
+                   return; // A newer cooldown replaced this one; let it handle expiry.
+               }
+               if (System.currentTimeMillis() < newEndTime) {
+                   return; // Still running (clock skew / early fire); ignore.
+               }
+               isInCooldown.put(playerId, false);
+               cooldownEndTime.remove(playerId);
+               forceCheckAndApplySize(player);
+           }, delayTicks);
+
            if (debugMode) {
                getLogger().info("===== COOLDOWN STARTED for " + player.getName()
                        + " (trigger: " + triggerKey + ", " + seconds + "s) =====");
@@ -485,6 +503,28 @@
                    send(player, "cooldown.refreshed", "seconds", String.valueOf(seconds));
                }
            }
+       }
+
+       private void scheduleExpiry(Player player, UUID playerId, long targetEndTime, long delayTicks) {
+           Bukkit.getScheduler().runTaskLater(this, () -> {
+               Long stillEndsAt = cooldownEndTime.get(playerId);
+               if (stillEndsAt == null || stillEndsAt.longValue() != targetEndTime) {
+                   // A newer cooldown replaced this one. Let it handle expiry.
+                   return;
+               }
+
+               long remainingMs = targetEndTime - System.currentTimeMillis();
+               if (remainingMs > 0) {
+                   // Fired slightly early due to tick alignment; reschedule.
+                   long remainingTicks = Math.max(1L, remainingMs / 50L);
+                   scheduleExpiry(player, playerId, targetEndTime, remainingTicks);
+                   return;
+               }
+
+               isInCooldown.put(playerId, false);
+               cooldownEndTime.remove(playerId);
+               forceCheckAndApplySize(player);
+           }, delayTicks);
        }
 
        // ================================================================
