@@ -337,7 +337,7 @@
 
    ## Credits
 
-   Idea from a player request. Built by **small_szyszka157**.
+   Idea from a player request. Built by **szyszka157**.
 
    ---
 
