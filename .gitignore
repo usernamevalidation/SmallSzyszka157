@@ -1,21 +1,46 @@
-.gradle
-**/build/
-!**/src/**/build/
+   # ============================================
+   # SmallSzyszka157 - .gitignore
+   # ============================================
 
-# Ignore Gradle GUI config
-gradle-app.setting
+   # ---- Gradle build output ----
+   .gradle/
+   build/
+   out/
 
-# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
-!gradle-wrapper.jar
+   # ---- Machine-specific Gradle config ----
+   # Contains an absolute path to your local JDK.
+   # Every developer must create their own copy locally.
+   gradle.properties
 
-# Avoid ignore Gradle wrappper properties
-!gradle-wrapper.properties
+   # ---- IDE ----
+   .idea/
+   *.iml
+   *.ipr
+   *.iws
+   .vscode/
+   .settings/
+   .project
+   .classpath
 
-# Cache of project
-.gradletasknamecache
+   # ---- Compiled output ----
+   *.class
+   *.jar
+   !gradle/wrapper/gradle-wrapper.jar
 
-# Eclipse Gradle plugin generated files
-# Eclipse Core
-.project
-# JDT-specific (Eclipse Java Development Tools)
-.classpath
+   # ---- Logs ----
+   *.log
+   logs/
+
+   # ---- OS junk ----
+   .DS_Store
+   Thumbs.db
+   desktop.ini
+
+   # ---- Local run/test data ----
+   run/
+   server/
+   plugins/
+   worlds/
+   world/
+   world_nether/
+   world_the_end/
